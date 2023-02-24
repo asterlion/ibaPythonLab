@@ -42,17 +42,30 @@ def InsertSort(A):  # сортировка вставками
     for i in range(len(A)):
         t = A[i]
         j = i
-        while (j-1 >= 0) and (A[j - 1] > t):
-            A[j-1], A[j] = A[j], A[j-1]
+        while (j - 1 >= 0) and (A[j - 1] > t):
+            A[j - 1], A[j] = A[j], A[j - 1]
             j -= 1
         A[j] = t
 
 
-table = prettytable.PrettyTable(["Размер списка", "Время пузырька", "Время быстрой", "Время вставкой"])
+def SelectSort(A):  # сортировка выбором
+    for i in range(len(A) - 1):
+        m = i
+        j = i + 1
+        while j < len(A):
+            if A[j] < A[m]:
+                m = j
+            j += 1
+        A[i], A[m] = A[m], A[i]
+        i += 1
+
+
+table = prettytable.PrettyTable(["Размер списка", "Время пузырька", "Время быстрой", "Время вставкой", "Время выбором"])
 x = []
 y1 = []
 y2 = []
 y3 = []
+y4 = []
 
 for N in range(1000, 5001, 1000):
     x.append(N)
@@ -67,6 +80,7 @@ for N in range(1000, 5001, 1000):
 
     B = A.copy()
     C = A.copy()
+    D = A.copy()
     # print(B)
 
     # BubbleSort(A)
@@ -74,11 +88,11 @@ for N in range(1000, 5001, 1000):
     # print(A)
 
     # QuickSort(B, 0, len(B)-1)
-    print("---")
+    # print("---")
     # print(B)
 
     # InsertSort(C)
-    print("---")
+    # print("---")
     # print(C)
 
     t1 = datetime.datetime.now()
@@ -105,10 +119,21 @@ for N in range(1000, 5001, 1000):
     print("Результат сортировки вставкой")
     print(C)
 
-    table.add_row([str(N), str((t2 - t1).total_seconds()), str((t4 - t3).total_seconds()), str((t6 - t5).total_seconds())])
+    t7 = datetime.datetime.now()
+    SelectSort(D)
+    t8 = datetime.datetime.now()
+    y4.append((t8 - t7).total_seconds())
+    print("Сортировка выбором   " + str(N) + "   заняла   " + str((t8 - t7).total_seconds()) + "c")
+    print("Результат сортировки выбором")
+    print(D)
+
+    table.add_row(
+        [str(N), str((t2 - t1).total_seconds()), str((t4 - t3).total_seconds()), str((t6 - t5).total_seconds()),
+         str((t8 - t7).total_seconds())])
 print(table)
 
 plt.plot(x, y1, "C0")
 plt.plot(x, y2, "C1")
 plt.plot(x, y3, "C2")
+plt.plot(x, y4, "C3")
 plt.show()
