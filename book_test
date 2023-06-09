@@ -1,0 +1,58 @@
+import unittest
+import bookLab5
+
+
+class BookTest(unittest.TestCase):
+    def test_toStringBook(self):
+        bt = bookLab5.Book(1, '1', '1', '1', 1, 1, 1, '1')
+        bt_str = bt.__str__()
+        self.assertIn(str(bt.book_id), bt_str)  # add assertion here
+        self.assertIn(str(bt.book_name), bt_str)  # add assertion here
+        self.assertIn(str(bt.book_author), bt_str)  # add assertion here
+        self.assertIn(str(bt.book_publishing_house), bt_str)  # add assertion here
+        self.assertIn(str(bt.book_year), bt_str)  # add assertion here
+        self.assertIn(str(bt.book_pages), bt_str)  # add assertion here
+        self.assertIn(str(bt.book_price), bt_str)  # add assertion here
+        self.assertIn(str(bt.book_binding_type), bt_str)  # add assertion here
+
+    def test_find_book_by_author(self):
+        bk1 = bookLab5.Book(1, '1', '1', '1', 1, 1, 1, '1')
+        bk2 = bookLab5.Book(2, '2', '2', '2', 2, 2, 2, '2')
+        bk3 = bookLab5.Book(3, '3', '3', '3', 3, 3, 3, '3')
+        bklist = bookLab5.Book
+        bklist.add_book_to_list(bk1)
+        bklist.add_book_to_list(bk2)
+        bklist.add_book_to_list(bk3)
+        chek1 = bklist.find_book_by_author('2')
+        shek2 = 1
+        self.assertIs(chek1, shek2)
+
+    def test_find_book_by_year_greater(self):
+        bk1 = bookLab5.Book(1, '1', '1', '1', 1986, 1, 1, '1')
+        bk2 = bookLab5.Book(2, '2', '2', '2', 2013, 2, 2, '2')
+        bk3 = bookLab5.Book(3, '3', '3', '3', 2004, 3, 3, '3')
+        bklist = bookLab5.Book
+        bklist.add_book_to_list(bk1)
+        bklist.add_book_to_list(bk2)
+        bklist.add_book_to_list(bk3)
+        chek1 = bklist.find_book_by_year_greater(2000)
+        shek2 = 1
+        self.assertIs(chek1, shek2)
+
+    def test_print_book_list(self):
+        bk1 = bookLab5.Book(1, '1', '1', '1', 1986, 1, 1, '1')
+        bk2 = bookLab5.Book(2, '2', '2', '2', 2013, 2, 2, '2')
+        bk3 = bookLab5.Book(3, '3', '3', '3', 2004, 3, 3, '3')
+        bklist = bookLab5.Book
+        bklist.add_book_to_list(bk1)
+        bklist.add_book_to_list(bk2)
+        bklist.add_book_to_list(bk3)
+        chek1 = str(bklist.print_book_list())
+        shek2 = 'Book ID = 1; Book Name  = 1; Book Author = 1; Book Publishing House = 1; Book year = 1986; Book Pages = 1; Book Price = 1; Book Binding = 1' \
+                'Book ID = 2; Book Name  = 2; Book Author = 2; Book Publishing House = 2; Book year = 2013; Book Pages = 2; Book Price = 2; Book Binding = 2' \
+                'Book ID = 3; Book Name  = 3; Book Author = 3; Book Publishing House = 3; Book year = 2004; Book Pages = 3; Book Price = 3; Book Binding = 3'
+        self.assertIs(chek1, None)
+
+
+if __name__ == '__main__':
+    unittest.main()
