@@ -3,6 +3,29 @@ import bookLab5
 
 
 class BookTest(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        """Set Up Class Method!"""
+        print("Setting up class for tests!")
+        print("==========================")
+
+    @classmethod
+    def tearDownClass(cls):
+        """Tear Down Class Method!"""
+        print("==========================")
+        print("Cleaning mess after testing!")
+
+    def setUp(self):
+        """Set Up Method!"""
+        print("Setting up some stuff for [" + self.shortDescription() + "]")
+        print("==========================")
+
+    def tearDown(self):
+        """Tear Down Method!"""
+        print("==========================")
+        print("Cleaning mess after [" + self.shortDescription() + "]")
+
     def test_toStringBook(self):
         bt = bookLab5.Book(1, '1', '1', '1', 1, 1, 1, '1')
         bt_str = bt.__str__()
