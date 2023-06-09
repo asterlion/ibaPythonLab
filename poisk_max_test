@@ -3,6 +3,29 @@ from poiskMax import large
 
 
 class TestPoiskMax(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        """Set Up Class Method!"""
+        print("Setting up class for tests!")
+        print("==========================")
+
+    @classmethod
+    def tearDownClass(cls):
+        """Tear Down Class Method!"""
+        print("==========================")
+        print("Cleaning mess after testing!")
+
+    def setUp(self):
+        """Set Up Method!"""
+        print("Setting up some stuff for [" + self.shortDescription() + "]")
+        print("==========================")
+
+    def tearDown(self):
+        """Tear Down Method!"""
+        print("==========================")
+        print("Cleaning mess after [" + self.shortDescription() + "]")
+        
     def test_large(self):
         list = [1, -18, 0, -6, 18]
         res = large(list)
